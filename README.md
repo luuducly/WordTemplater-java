@@ -56,6 +56,40 @@ implementation 'com.github.luuducly:wordtemplater:1.0.0'
 
 ---
 
+## How It Works
+
+<p align="center">
+  <img alt="WordTemplater Full Showcase Template" src="docs/images/full_template_showcase.png" width="920"/>
+</p>
+
+WordTemplater bridges visual document authoring in Microsoft Word with automated Java data binding:
+
+1. **Design Visually in Microsoft Word**:
+   - Insert standard Word **MergeFields** (`Ctrl + F9` or `Insert -> Quick Parts -> Field -> MergeField`) or simple guillemets (`«field»`).
+   - Use built-in formatters directly inside field tags: `«upper(name)»`, `«currency(total, 'en-US')»`, `«date(createdAt, 'yyyy-MM-dd')»`, `«table(products)»`...`«endtable»`, `«loop(items)»`...`«endloop»`.
+2. **Supply Data**:
+   - Pass any Java object (POJO getters, records, `Map<String, Object>`, or Jackson `JsonNode`). WordTemplater resolves nested properties (`customer.address.city`) and list items (`items[0].price`) case-insensitively.
+3. **Export High-Fidelity Documents**:
+   - Generates clean OpenXML `.docx` files, `OutputStream`, or byte arrays with **zero Microsoft Office dependency**.
+
+---
+
+## Interactive Desktop GUI Studio
+
+To test templates visually, experiment with mock JSON payloads, and see real-time exports, you can use the cross-platform GUI Studio app in the main [WordTemplater](https://github.com/luuducly/WordTemplater) repository:
+
+```bash
+git clone https://github.com/luuducly/WordTemplater.git
+cd WordTemplater
+dotnet run --project examples/WordTemplater.Desktop
+```
+
+- 🌟 **Built-in Templates**: Enterprise Showcase (QR, Barcode, Images, Conditions, Tables), Pre-printed Bills, Invoices, and Custom `.docx` picker.
+- ✏️ **Direct In-Word Editing**: Click **"✏️ Mở File Template trong Word (.docx)"** to edit template shapes and fields directly in Microsoft Word with automatic reload.
+- ⚡ **Instant Export & View**: One-click generation and instant document inspection.
+
+---
+
 ## Quick Start
 
 ```java
