@@ -13,22 +13,18 @@ import java.util.regex.Pattern;
 
 public class TokenResolver {
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final Pattern TOKEN_PATTERN = Pattern.compile("[^\\[\\]\\.]+");
 
     public static Object resolve(Object data, String path) {
         if (data == null || path == null || path.trim().isEmpty()) {
             return null;
         }
 
-        Pattern pattern = Pattern.compile("([^[.\\]]+)|\\[(\\d+)\\]");
-        Matcher matcher = pattern.matcher(path.trim());
+        Matcher matcher = TOKEN_PATTERN.matcher(path.trim());
         List<String> parts = new ArrayList<>();
 
         while (matcher.find()) {
-            if (matcher.group(1) != null) {
-                parts.add(matcher.group(1));
-            } else if (matcher.group(2) != null) {
-                parts.add(matcher.group(2));
-            }
+            parts.add(matcher.group());
         }
 
         Object current = data;

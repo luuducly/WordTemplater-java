@@ -81,6 +81,15 @@ public class EvaluatorTest {
         assertEquals("Acme Corporation", TokenResolver.resolve(data, "Customer.name"));
         assertEquals("Acme Corporation", TokenResolver.resolve(data, "customer.Name"));
 
+        List<Map<String, Object>> items = new ArrayList<>();
+        Map<String, Object> item0 = new HashMap<>();
+        item0.put("Title", "Cloud Product");
+        items.add(item0);
+        data.put("Items", items);
+
+        assertEquals("Cloud Product", TokenResolver.resolve(data, "Items[0].Title"));
+        assertEquals("Cloud Product", TokenResolver.resolve(data, "items[0].title"));
+
         ExpressionParser.ParsedExpression parsed = ExpressionParser.parse("currency(Total, 'vi-VN')");
         assertEquals("currency", parsed.funcName);
         assertEquals("Total", parsed.fieldPath);
